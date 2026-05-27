@@ -1,0 +1,34 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // Modelo default por si algún agente no tiene modelo explícito.
+  "model": "opencode-go/deepseek-v4-pro",
+
+  // Modelo chico para tareas livianas internas.
+  "small_model": "opencode-go/deepseek-v4-flash",
+
+  // Agente primario del workflow del proyecto.
+  "default_agent": "orchestrator",
+
+  // Instrucciones base que OpenCode debe cargar en cada sesión.
+  "instructions": ["AGENTS.md", "docs/PROJECT_STATE.md"],
+
+  // Permisos globales conservadores.
+  "permission": {
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "lsp": "allow",
+
+    "edit": {
+      "*": "ask",
+      "java_base_app/Weather-Hub/**": "deny"
+    },
+    "bash": "ask",
+    "task": "ask",
+    "webfetch": "ask",
+    "websearch": "ask",
+    "external_directory": "deny"
+  }
+}
