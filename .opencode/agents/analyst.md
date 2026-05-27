@@ -1,7 +1,7 @@
 ---
 description: Analiza código existente, estructura, flujos, dependencias y riesgos. Solo lectura.
 mode: subagent
-model: opencode-go/qwen3.6-plus
+model: opencode-go/qwen3.5-plus
 temperature: 0.1
 steps: 8
 permission:

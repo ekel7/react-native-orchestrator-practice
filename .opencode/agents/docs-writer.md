@@ -1,7 +1,7 @@
 ---
 description: Actualiza documentación, README, changelog, planes y reportes de fase.
 mode: subagent
-model: opencode-go/qwen3.6-plus
+model: opencode-go/qwen3.5-plus
 temperature: 0.25
 steps: 8
 permission:

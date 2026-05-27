@@ -8,14 +8,14 @@ El agente primario por defecto es `orchestrator`.
 ## Modelos por agente
 
 - orchestrator → Kimi K2.6
-- analyst → Qwen3.6 Plus
+- analyst → Qwen3.5 Plus
 - ui-designer → MiniMax M2.7
 - builder → DeepSeek V4 Pro
 - qa-tester → DeepSeek V4 Flash
 - reviewer → Kimi K2.6
 - architect → GLM-5.1
 - git-guardian → DeepSeek V4 Flash
-- docs-writer → Qwen3.6 Plus
+- docs-writer → Qwen3.5 Plus
 
 ## Workflow
 
