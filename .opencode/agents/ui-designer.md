@@ -1,7 +1,7 @@
 ---
 description: Diseña mejoras visuales, layout, UX, componentes y consistencia de interfaz.
 mode: subagent
-model: opencode-go/minimax-m2.7
+model: opencode/mimo-v2.5-free
 temperature: 0.35
 steps: 8
 permission:

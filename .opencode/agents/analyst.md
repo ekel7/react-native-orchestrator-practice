@@ -1,7 +1,7 @@
 ---
 description: Analiza código existente, estructura, flujos, dependencias y riesgos. Solo lectura.
 mode: subagent
-model: opencode-go/qwen3.5-plus
+model: opencode/deepseek-v4-flash-free
 temperature: 0.1
 steps: 8
 permission:

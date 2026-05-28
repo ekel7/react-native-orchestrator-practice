@@ -2,16 +2,21 @@
   "$schema": "https://opencode.ai/config.json",
 
   // Modelo default por si algún agente no tiene modelo explícito.
-  "model": "opencode-go/deepseek-v4-pro",
+  "model": "opencode/deepseek-v4-flash-free",
 
   // Modelo chico para tareas livianas internas.
-  "small_model": "opencode-go/deepseek-v4-flash",
+  "small_model": "opencode/deepseek-v4-flash-free",
 
   // Agente primario del workflow del proyecto.
   "default_agent": "orchestrator",
 
   // Instrucciones base que OpenCode debe cargar en cada sesión.
-  "instructions": ["AGENTS.md", "docs/PROJECT_STATE.md"],
+  "instructions": [
+    "AGENTS.md",
+    "docs/PROJECT_STATE.md",
+    "docs/workflow/PHASE_CONTRACT.md",
+    "docs/workflow/AGENT_ROUTING.md"
+  ],
 
   // Permisos globales conservadores.
   "permission": {

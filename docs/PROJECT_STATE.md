@@ -2,44 +2,63 @@
 
 ## Estado actual
 
-Proyecto en configuración inicial de workflow multiagente con OpenCode Go.
+Proyecto configurado con workflow multiagente en OpenCode Go.
 El agente primario por defecto es `orchestrator`.
+
+## Workflow V2
+
+El proyecto usa un flujo por fases con gates:
+
+1. Estado inicial.
+2. Plan.
+3. Aprobación humana explícita.
+4. Build controlado.
+5. QA.
+6. Revisión independiente.
+7. Auditoría de diff.
+8. Cierre de fase.
+9. Commit humano opcional.
+
+Ver:
+
+- `docs/workflow/PHASE_CONTRACT.md`
+- `docs/workflow/AGENT_ROUTING.md`
+
+## Comandos útiles
+
+- `/plan-fase <descripción>`: crear plan sin implementar.
+- `/build-fase <fase aprobada>`: implementar una fase aprobada con gates.
+- `/qa-fase <fase>`: ejecutar QA sin modificar archivos.
+- `/review-fase <cierre>`: auditar cierre contra el repo real.
+- `/next-prompt <fase>`: generar prompt seguro para la próxima fase.
+- `/git-check <fase>`: revisión pre-commit humana.
 
 ## Modelos por agente
 
 - orchestrator → Kimi K2.6
-- analyst → Qwen3.5 Plus
-- ui-designer → MiniMax M2.7
+- analyst → DeepSeek V4 Flash Free
+- ui-designer → MiMo V2.5 Free
 - builder → DeepSeek V4 Pro
-- qa-tester → DeepSeek V4 Flash
+- qa-tester → DeepSeek V4 Flash Free
 - reviewer → Kimi K2.6
 - architect → GLM-5.1
-- git-guardian → DeepSeek V4 Flash
-- docs-writer → Qwen3.5 Plus
-
-## Workflow
-
-1. El usuario habla principalmente con orchestrator.
-2. orchestrator analiza la tarea y delega.
-3. builder solo implementa después de aprobación.
-4. qa-tester verifica funcionamiento.
-5. reviewer revisa calidad técnica.
-6. git-guardian revisa diff antes del commit.
-7. docs-writer actualiza documentación.
+- git-guardian → DeepSeek V4 Flash Free
+- workflow-auditor → DeepSeek V4 Flash Free
+- docs-writer → MiMo V2.5 Free
 
 ## Política de costo
 
 - `architect` usa GLM-5.1 y se considera un agente caro.
-- `architect` no se usa por defecto: requiere una decisión arquitectónica bloqueada y una justificación previa del orquestador.
-- Migraciones pantalla por pantalla deben pasar primero por `analyst`, `builder`, `qa-tester` y `reviewer`.
-- Para tareas locales, bugs puntuales, QA, documentación, revisión de diff o UI aislada, se debe elegir un agente más barato.
+- `architect` no se usa por defecto: requiere decisión arquitectónica bloqueada y justificación previa del orquestador.
+- Migraciones pantalla por pantalla deben pasar primero por `analyst`, `builder`, `qa-tester`, `reviewer` y/o `workflow-auditor`.
+- Para tareas locales, bugs puntuales, QA, documentación, revisión de diff o UI aislada, elegir un agente más barato.
+- Los roles de bajo impacto usan modelos free mientras estén disponibles, manteniendo modelos potentes en orquestación, build, review y arquitectura.
 
 ## Estado de Git
 
-- El directorio raíz del workflow ya tiene un repositorio Git inicializado.
-- Todavía no hay commits iniciales.
-- La rama inicial creada por `git init` es `master`.
-- `java_base_app/Weather-Hub` queda ignorado por Git en el repositorio raíz.
+- El directorio raíz del workflow tiene un repositorio Git inicializado.
+- La rama inicial puede ser `master`.
+- `java_base_app/Weather-Hub` debe quedar ignorado por Git en el repositorio raíz.
 - `java_base_app/Weather-Hub` es solo referencia de lectura: puede consultarse para entender la app original, pero no debe modificarse.
 
 ## Restricciones permanentes
@@ -50,3 +69,4 @@ El agente primario por defecto es `orchestrator`.
 - No hacer push.
 - No tocar credenciales.
 - Mantener fases chicas.
+- No cerrar una fase sin QA y revisión independiente.
