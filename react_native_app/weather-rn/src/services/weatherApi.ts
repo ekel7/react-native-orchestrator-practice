@@ -39,14 +39,14 @@ export async function getWeatherByCity(
 }
 
 export async function getWeatherByLatLng(
-  lat: string,
-  lon: string,
+  lat: number,
+  lon: number,
   units: string = 'metric',
 ): Promise<WeatherResult> {
   try {
     const apiKey = getApiKey();
     const response = await fetch(
-      `${BASE_URL}weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&appid=${apiKey}&units=${units}`,
+      `${BASE_URL}weather?lat=${encodeURIComponent(String(lat))}&lon=${encodeURIComponent(String(lon))}&appid=${apiKey}&units=${units}`,
     );
 
     if (!response.ok) {
@@ -66,14 +66,14 @@ export async function getWeatherByLatLng(
 }
 
 export async function getWeatherForecastByLatLng(
-  lat: string,
-  lon: string,
+  lat: number,
+  lon: number,
   units: string = 'metric',
 ): Promise<WeatherForecastResult> {
   try {
     const apiKey = getApiKey();
     const response = await fetch(
-      `${BASE_URL}forecast?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&appid=${apiKey}&units=${units}`,
+      `${BASE_URL}forecast?lat=${encodeURIComponent(String(lat))}&lon=${encodeURIComponent(String(lon))}&appid=${apiKey}&units=${units}`,
     );
 
     if (!response.ok) {

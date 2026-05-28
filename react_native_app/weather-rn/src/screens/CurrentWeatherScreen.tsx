@@ -23,40 +23,46 @@ export default function CurrentWeatherScreen() {
   async function loadWeather() {
     setLoading(true);
     setError(null);
+    setData(null);
     try {
       const result = await getWeatherByCity(city);
       setData(result);
-    } catch (err: any) {
-      setError(err.message || 'Failed to load weather');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to load weather';
+      setError(message);
     } finally {
       setLoading(false);
     }
   }
 
-  if (loading) return <LoadingSpinner />;
-  if (error) return <ErrorMessage message={error} />;
-  if (!data) return null;
-
   return (
     <ScrollView style={styles.container}>
       <CitySelector cities={CITIES} selected={city} onSelect={setCity} />
-      
-      <Card style={styles.card}>
-        <Card.Content>
-          <Text variant="headlineMedium">{data.name}, {data.main.temp}°C</Text>
-          <Text variant="bodyLarge">Max: {data.main.temp_max}°C | Min: {data.main.temp_min}°C</Text>
-        </Card.Content>
-      </Card>
 
-      <Card style={styles.card}>
-        <Card.Content>
-          <MetricRow label="Pressure" value={`${data.main.pressure} hPa`} />
-          <MetricRow label="Humidity" value={`${data.main.humidity}%`} />
-          <MetricRow label="Wind" value={`${data.wind.speed} m/s, ${data.wind.deg}°`} />
-          <MetricRow label="Sunrise" value={convertUnixToHour(data.sys.sunrise)} />
-          <MetricRow label="Sunset" value={convertUnixToHour(data.sys.sunset)} />
-        </Card.Content>
-      </Card>
+      {loading && <LoadingSpinner />}
+
+      {error && <ErrorMessage message={error} />}
+
+      {data && (
+        <>
+          <Card style={styles.card}>
+            <Card.Content>
+              <Text variant="headlineMedium">{data.name}, {data.main.temp}°C</Text>
+              <Text variant="bodyLarge">Max: {data.main.temp_max}°C | Min: {data.main.temp_min}°C</Text>
+            </Card.Content>
+          </Card>
+
+          <Card style={styles.card}>
+            <Card.Content>
+              <MetricRow label="Pressure" value={`${data.main.pressure} hPa`} />
+              <MetricRow label="Humidity" value={`${data.main.humidity}%`} />
+              <MetricRow label="Wind" value={`${data.wind.speed} m/s, ${data.wind.deg}°`} />
+              <MetricRow label="Sunrise" value={convertUnixToHour(data.sys.sunrise)} />
+              <MetricRow label="Sunset" value={convertUnixToHour(data.sys.sunset)} />
+            </Card.Content>
+          </Card>
+        </>
+      )}
     </ScrollView>
   );
 }
