@@ -133,18 +133,18 @@ flowchart TD
   DocsWriter --> ProjectState[docs/PROJECT_STATE.md]
 ```
 
-| Agente | Responsabilidad |
-| --- | --- |
-| `orchestrator` | Coordina fases, gates y delegacion. |
-| `analyst` | Lee codigo y contexto, sin editar. |
-| `ui-designer` | Propone UX/UI, sin implementar. |
-| `builder` | Implementa solo alcance aprobado. |
-| `qa-tester` | Ejecuta checks y valida funcionamiento. |
-| `reviewer` | Revisa calidad tecnica, bugs y riesgos. |
-| `workflow-auditor` | Compara el cierre reportado contra el repo real. |
-| `git-guardian` | Revisa diff antes del commit humano. |
-| `docs-writer` | Actualiza documentacion persistente cuando corresponde. |
-| `architect` | Solo para decisiones arquitectonicas grandes. |
+| Agente | Modelo | Responsabilidad |
+| --- | --- | --- |
+| `orchestrator` | `opencode-go/kimi-k2.6` | Coordina fases, gates y delegacion. |
+| `analyst` | `opencode/deepseek-v4-flash-free` | Lee codigo y contexto, sin editar. |
+| `ui-designer` | `opencode/mimo-v2.5-free` | Propone UX/UI, sin implementar. |
+| `builder` | `opencode-go/deepseek-v4-pro` | Implementa solo alcance aprobado. |
+| `qa-tester` | `opencode/deepseek-v4-flash-free` | Ejecuta checks y valida funcionamiento. |
+| `reviewer` | `opencode-go/kimi-k2.6` | Revisa calidad tecnica, bugs y riesgos. |
+| `workflow-auditor` | `opencode/deepseek-v4-flash-free` | Compara el cierre reportado contra el repo real. |
+| `git-guardian` | `opencode/deepseek-v4-flash-free` | Revisa diff antes del commit humano. |
+| `docs-writer` | `opencode/mimo-v2.5-free` | Actualiza documentacion persistente cuando corresponde. |
+| `architect` | `opencode-go/glm-5.1` | Solo para decisiones arquitectonicas grandes. |
 
 ## Comandos OpenCode
 
