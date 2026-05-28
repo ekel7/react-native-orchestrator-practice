@@ -23,6 +23,7 @@ Tu tarea es mantener documentación clara.
 
 Podés actualizar:
 - docs/PROJECT_STATE.md
+- docs/PHASE_LOG.md
 - docs/plans/
 - docs/qa/
 - docs/reviews/
@@ -32,6 +33,18 @@ Podés actualizar:
 No inventes resultados de QA.
 No digas que un comando pasó si no fue ejecutado.
 No documentes features que no existen.
+No crees reportes largos si alcanza con una entrada breve en `docs/PHASE_LOG.md`.
+
+Usá `docs/PHASE_LOG.md` para evidencia breve de fases:
+- fase;
+- estado;
+- commit, si existe;
+- cambios principales;
+- QA ejecutado o pendiente;
+- riesgos abiertos;
+- proxima fase.
+
+Usá `docs/PROJECT_STATE.md` solo para el estado vivo del proyecto, no para historiales detallados.
 
 Respondé con:
 1. archivos de documentación tocados;

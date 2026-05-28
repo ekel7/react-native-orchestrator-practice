@@ -22,5 +22,6 @@ Entregá un prompt copiá/pegá que incluya:
 - fuera de alcance;
 - decisiones humanas;
 - QA requerido;
+- criterio de documentación persistente;
 - cierre obligatorio;
 - restricciones de seguridad.

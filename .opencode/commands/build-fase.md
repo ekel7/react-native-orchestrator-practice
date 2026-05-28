@@ -24,8 +24,9 @@ Flujo obligatorio:
 3. Delegá implementación a builder.
 4. Después de builder, delegá QA a qa-tester.
 5. Después de QA, delegá revisión a reviewer o workflow-auditor según corresponda.
-6. Revisá git status --short y git diff --stat.
-7. Cerrá usando el formato de docs/workflow/PHASE_CONTRACT.md.
+6. Decidí si corresponde documentación persistente; si corresponde, delegá a docs-writer.
+7. Revisá git status --short y git diff --stat.
+8. Cerrá usando el formato de docs/workflow/PHASE_CONTRACT.md.
 
 Cierre obligatorio:
 1. Estado: APROBADO / APROBADO CON OBSERVACIONES / BLOQUEADO
@@ -36,5 +37,6 @@ Cierre obligatorio:
 6. Revisión de diff
 7. Riesgos pendientes
 8. Pasos manuales para probar
-9. Mensaje de commit sugerido
-10. Próxima fase propuesta, sin implementarla
+9. Documentación actualizada o motivo para no actualizarla
+10. Mensaje de commit sugerido
+11. Próxima fase propuesta, sin implementarla

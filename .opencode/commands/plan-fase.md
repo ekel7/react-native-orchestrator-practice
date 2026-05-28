@@ -28,6 +28,7 @@ Entregá:
 7. QA requerido;
 8. riesgos;
 9. decisiones humanas necesarias;
-10. prompt exacto recomendado para aprobar la fase.
+10. si requiere actualizar docs/PHASE_LOG.md o docs/PROJECT_STATE.md;
+11. prompt exacto recomendado para aprobar la fase.
 
 Esperá aprobación humana explícita antes de implementar.

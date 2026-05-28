@@ -99,7 +99,21 @@ Usá al menos uno de estos:
 - `workflow-auditor` para auditar cierre vs repo real;
 - `git-guardian` para revisión pre-commit.
 
-### Gate 5 — Cierre
+### Gate 5 — Evidencia y documentacion
+Antes del cierre, decidí si corresponde documentación persistente.
+
+Usá `docs-writer` cuando:
+- se complete una fase funcional relevante;
+- se agregue o cambie una dependencia;
+- cambie arquitectura, workflow o contrato de fase;
+- quede QA manual pendiente;
+- quede un riesgo o decisión técnica abierta.
+
+Preferí actualizar `docs/PHASE_LOG.md` con una entrada breve y `docs/PROJECT_STATE.md` solo si cambia el estado vivo del proyecto.
+
+Si no actualizás documentación, explicá por qué en el cierre.
+
+### Gate 6 — Cierre
 Cerrá usando semáforo:
 
 - `APROBADO`: QA pasa y diff coincide con alcance.
@@ -115,8 +129,9 @@ Formato obligatorio:
 6. Revisión de diff
 7. Riesgos pendientes
 8. Pasos manuales para probar
-9. Mensaje de commit sugerido
-10. Próxima fase propuesta
+9. Documentación actualizada o motivo para no actualizarla
+10. Mensaje de commit sugerido
+11. Próxima fase propuesta
 
 Si está `BLOQUEADO`, no digas que está listo para avanzar.
 

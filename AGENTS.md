@@ -48,8 +48,11 @@ Todo cambio debe seguir estos gates:
    - Confirmar que el diff coincide con el alcance aprobado.
 
 7. **Documentación**
-   - Actualizar documentación solo si fue aprobado o si el cierre lo requiere.
+   - Actualizar documentación persistente cuando la fase cambie estado, dependencias, riesgos, workflow o decisiones.
+   - Usar `docs/PHASE_LOG.md` como registro breve de fases e hitos.
+   - Usar `docs/PROJECT_STATE.md` para el estado vivo del proyecto.
    - No documentar features que no existen.
+   - Si no se actualiza documentación, explicar por qué en el cierre.
 
 8. **Cierre**
    - Resumen de cambios.
@@ -59,6 +62,7 @@ Todo cambio debe seguir estos gates:
    - Revisión de diff.
    - Riesgos pendientes.
    - Pasos manuales de prueba.
+   - Documentación actualizada o motivo para no actualizarla.
    - Mensaje de commit sugerido.
    - Próxima fase propuesta sin implementarla.
 
@@ -127,7 +131,8 @@ Formato obligatorio:
 6. Revisión de diff
 7. Riesgos pendientes
 8. Pasos manuales para probar
-9. Mensaje de commit sugerido
-10. Próxima fase propuesta
+9. Documentación actualizada o motivo para no actualizarla
+10. Mensaje de commit sugerido
+11. Próxima fase propuesta
 
 Si el estado es `BLOQUEADO`, no proponer avanzar como si estuviera listo.

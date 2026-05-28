@@ -63,7 +63,22 @@ Antes del cierre:
 - revisar si se tocaron archivos sensibles;
 - revisar si el diff coincide con el alcance aprobado.
 
-### Gate 5 — Cierre
+### Gate 5 — Evidencia y documentacion
+Antes del cierre, decidir si la fase requiere evidencia persistente en docs.
+
+Actualizar `docs/PHASE_LOG.md` o `docs/PROJECT_STATE.md` cuando:
+- se completa una fase funcional relevante;
+- se agrega o cambia una dependencia;
+- cambia arquitectura, workflow o contrato de fase;
+- queda QA manual pendiente;
+- queda un riesgo o decision tecnica abierta;
+- el cambio afecta el estado actual o la proxima fase.
+
+No crear reportes `.md` por cada microcambio si el cierre del chat y el commit describen suficiente contexto.
+
+Si no se actualiza documentacion, explicar brevemente en el cierre por que no hizo falta.
+
+### Gate 6 — Cierre
 Toda fase debe cerrar con:
 1. resumen de cambios;
 2. archivos creados/modificados/eliminados;
@@ -72,8 +87,9 @@ Toda fase debe cerrar con:
 5. revisión de diff;
 6. riesgos pendientes;
 7. pasos manuales para probar;
-8. mensaje de commit sugerido;
-9. propuesta de próxima fase, sin implementarla.
+8. documentacion actualizada o motivo para no actualizarla;
+9. mensaje de commit sugerido;
+10. propuesta de próxima fase, sin implementarla.
 
 ## Reglas de aprobación
 

@@ -74,3 +74,15 @@ No usar architect para:
 
 El agente que implementa no debe ser el único que aprueba su propio trabajo.
 Siempre debe existir al menos una revisión posterior por `qa-tester`, `reviewer`, `workflow-auditor` o `git-guardian`.
+
+## Regla de documentacion
+
+Usar `docs-writer` solo cuando la fase requiera evidencia persistente:
+- fase funcional completada;
+- dependencia agregada o removida;
+- decision tecnica relevante;
+- cambio de workflow;
+- QA manual pendiente;
+- riesgo abierto.
+
+Para microcambios, alcanza con el cierre del chat y un commit claro.
