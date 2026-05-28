@@ -59,6 +59,22 @@ Registro breve de fases e hitos del proyecto. Mantener entradas concisas; el det
 - QA: TypeScript OK; reportado permiso denegado, sin API key y datos reales con key.
 - Pendiente: revisar configuracion iOS si se testea en iOS; considerar fallback de ubicacion en fase futura.
 
+### Fase 6 — UX polish, retry y manejo de errores de red
+
+- Estado: APROBADO
+- Commit: `f54ce8c`
+- Cambios: parseo de errores OWM (body JSON), prop `onRetry` en ErrorMessage, Snackbar transitorio de offline, estado vacio en Today, normalizacion de loading/error/retry en ambas pantallas.
+- QA: TypeScript OK; git-guardian aprobo diff; sin archivos inesperados.
+- Pendiente: QA visual en dispositivo/emulador con API key real.
+
+### Fase 7 — QA final y documentacion
+
+- Estado: APROBADO
+- Commit: pendiente de commit humano
+- Cambios: actualizacion de `docs/PHASE_LOG.md` y `docs/PROJECT_STATE.md`; revision de diff historico con git-guardian; QA estructural (tsc, git status, credenciales).
+- QA: TypeScript OK; working tree limpio; sin credenciales hardcodeadas; Weather-Hub no trackeado; git-guardian aprobo.
+- Pendiente: QA end-to-end manual en dispositivo con API key real.
+
 ## Workflow
 
 ### Workflow V2 — Gates y auditoria
@@ -67,4 +83,4 @@ Registro breve de fases e hitos del proyecto. Mantener entradas concisas; el det
 - Commit: `4952f80`
 - Cambios: comandos OpenCode, `workflow-auditor`, contrato de fase y routing de agentes.
 - QA: `opencode debug config` OK; TypeScript del proyecto OK.
-- Pendiente: usar el flujo en Fase 6 y ajustar si aparece friccion real.
+- Pendiente: usar el flujo en fases futuras y ajustar si aparece friccion real.

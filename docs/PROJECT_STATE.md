@@ -2,8 +2,60 @@
 
 ## Estado actual
 
-Proyecto configurado con workflow multiagente en OpenCode Go.
-El agente primario por defecto es `orchestrator`.
+Migracion de Weather Hub (Android/Java) a React Native/Expo **completada funcionalmente**.
+
+### Pantallas implementadas
+
+| Pantalla | Fuente original | Estado |
+|----------|----------------|--------|
+| **Today** (`CurrentWeatherScreen`) | FragmentTwo (clima por ciudad) | ✅ Completa |
+| **Forecast** (`ForecastScreen`) | FragmentThree (pronostico 5 dias/3h por GPS) | ✅ Completa |
+
+### Navegacion y UI
+
+- Bottom Tabs Navigator (`@react-navigation/bottom-tabs`) con 2 tabs: Today y Forecast.
+- Tema Material 3 via `react-native-paper` (primary `#7A74F4`).
+- Componentes reutilizables: `CitySelector`, `MetricRow`, `ForecastListItem`, `LoadingSpinner`, `ErrorMessage`.
+
+### Capa de datos
+
+- Servicio `weatherApi.ts` con `fetch` nativo y 3 endpoints tipados:
+  - `getWeatherByCity(city)`
+  - `getWeatherByLatLng(lat, lon)`
+  - `getWeatherForecastByLatLng(lat, lon)`
+- Parseo de errores JSON de OpenWeatherMap para mensajes claros.
+- Hook `useLocation` con `expo-location` para permisos y coordenadas GPS.
+
+### Dependencias instaladas
+
+| Paquete | Version |
+|---------|---------|
+| `expo` | ~56.0.5 |
+| `react-native` | 0.85.3 |
+| `react` | 19.2.3 |
+| `@react-navigation/native` | ^7.2.5 |
+| `@react-navigation/bottom-tabs` | ^7.16.2 |
+| `react-native-paper` | ^5.15.3 |
+| `react-native-screens` | ^4.25.2 |
+| `react-native-safe-area-context` | ^5.8.0 |
+| `expo-location` | (instalado en Fase 5) |
+| `expo-status-bar` | ~56.0.4 |
+
+### Riesgos y deuda tecnica
+
+- **API key expuesta:** `EXPO_PUBLIC_OPENWEATHER_API_KEY` queda visible en el bundle JS. Aceptado para prototipo/demo.
+- **Sin deteccion proactiva de red:** Se maneja offline por errores de `fetch` (sin `@react-native-community/netinfo`).
+- **QA real pendiente:** Validacion con API key real y pruebas en dispositivo/emulador aun no ejecutadas.
+- **iOS location:** `expo-location` requiere `NSLocationWhenInUseUsageDescription` en `Info.plist` si se testea en iOS.
+- **Iconos de clima:** No implementados (fuera de alcance de la migracion).
+
+### Fuera de alcance (decidido)
+
+- FragmentOne / Historical Weather Data (nunca estuvo activo en la app original).
+- Busqueda libre de ciudades.
+- Cache offline / persistencia local.
+- Tests unitarios automatizados.
+- Dark mode dinamico.
 
 ## Workflow V2
 
