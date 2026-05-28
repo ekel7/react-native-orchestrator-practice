@@ -12,6 +12,19 @@ function getApiKey(): string {
   return key;
 }
 
+async function parseError(response: Response): Promise<Error> {
+  try {
+    const body = await response.json();
+    const message: string =
+      typeof body?.message === 'string' ? body.message : response.statusText;
+    return new Error(`OpenWeather API error: ${message}`);
+  } catch {
+    return new Error(
+      `OpenWeather API error: ${response.status} ${response.statusText}`,
+    );
+  }
+}
+
 export async function getWeatherByCity(
   city: string,
   units: string = 'metric',
@@ -23,9 +36,7 @@ export async function getWeatherByCity(
     );
 
     if (!response.ok) {
-      throw new Error(
-        `OpenWeather API error: ${response.status} ${response.statusText}`,
-      );
+      throw await parseError(response);
     }
 
     const data: WeatherResult = await response.json();
@@ -50,9 +61,7 @@ export async function getWeatherByLatLng(
     );
 
     if (!response.ok) {
-      throw new Error(
-        `OpenWeather API error: ${response.status} ${response.statusText}`,
-      );
+      throw await parseError(response);
     }
 
     const data: WeatherResult = await response.json();
@@ -77,9 +86,7 @@ export async function getWeatherForecastByLatLng(
     );
 
     if (!response.ok) {
-      throw new Error(
-        `OpenWeather API error: ${response.status} ${response.statusText}`,
-      );
+      throw await parseError(response);
     }
 
     const data: WeatherForecastResult = await response.json();

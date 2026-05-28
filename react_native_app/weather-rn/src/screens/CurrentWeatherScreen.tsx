@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { Text, Card } from 'react-native-paper';
+import { Text, Card, Snackbar } from 'react-native-paper';
 import { getWeatherByCity } from '../services/weatherApi';
 import { CITIES } from '../constants/cities';
 import { convertUnixToHour } from '../utils/dateUtils';
@@ -10,11 +10,27 @@ import MetricRow from '../components/MetricRow';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 
+const NETWORK_ERROR_PATTERNS = [
+  'fetch',
+  'network',
+  'Failed to fetch',
+  'internet',
+  'Network request failed',
+] as const;
+
+function isNetworkError(message: string): boolean {
+  const lower = message.toLowerCase();
+  return NETWORK_ERROR_PATTERNS.some((pattern) =>
+    lower.includes(pattern.toLowerCase()),
+  );
+}
+
 export default function CurrentWeatherScreen() {
   const [city, setCity] = useState<string>(CITIES[0]); // Dhaka
   const [data, setData] = useState<WeatherResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
 
   useEffect(() => {
     loadWeather();
@@ -24,12 +40,16 @@ export default function CurrentWeatherScreen() {
     setLoading(true);
     setError(null);
     setData(null);
+    setSnackbarVisible(false);
     try {
       const result = await getWeatherByCity(city);
       setData(result);
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to load weather';
       setError(message);
+      if (isNetworkError(message)) {
+        setSnackbarVisible(true);
+      }
     } finally {
       setLoading(false);
     }
@@ -41,14 +61,24 @@ export default function CurrentWeatherScreen() {
 
       {loading && <LoadingSpinner />}
 
-      {error && <ErrorMessage message={error} />}
+      {error && <ErrorMessage message={error} onRetry={loadWeather} />}
+
+      {!loading && !error && !data && (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>Select a city to see weather</Text>
+        </View>
+      )}
 
       {data && (
         <>
           <Card style={styles.card}>
             <Card.Content>
-              <Text variant="headlineMedium">{data.name}, {data.main.temp}°C</Text>
-              <Text variant="bodyLarge">Max: {data.main.temp_max}°C | Min: {data.main.temp_min}°C</Text>
+              <Text variant="headlineMedium">
+                {data.name}, {data.main.temp}°C
+              </Text>
+              <Text variant="bodyLarge">
+                Max: {data.main.temp_max}°C | Min: {data.main.temp_min}°C
+              </Text>
             </Card.Content>
           </Card>
 
@@ -63,6 +93,14 @@ export default function CurrentWeatherScreen() {
           </Card>
         </>
       )}
+
+      <Snackbar
+        visible={snackbarVisible}
+        onDismiss={() => setSnackbarVisible(false)}
+        duration={4000}
+      >
+        No internet connection. Please check your network.
+      </Snackbar>
     </ScrollView>
   );
 }
@@ -70,4 +108,11 @@ export default function CurrentWeatherScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16 },
   card: { marginVertical: 8 },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 64,
+  },
+  emptyText: { fontSize: 16, color: '#666', textAlign: 'center' },
 });
